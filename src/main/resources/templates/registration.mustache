@@ -1,0 +1,80 @@
+<html>
+<head>
+    <title>Регистрация</title>
+    <style>
+    .boldSelect{
+        position: relative;
+        font-weight: 600;
+        width: 80%;
+        height: 30;
+        font-family: Arial;
+        border: 2px solid Grey;
+        font-size: 15}
+
+    .boldBtn{
+        position: relative;
+        font-weight: bold;
+        text-align: center;
+        font-family: Arial;
+        height: 35;
+        width: 150;
+        border-radius: 7px;
+        background-color: #DCDCDC;
+        font-size: 16}
+
+    .formTable{border-collapse:collapse;
+                    border: 2px solid Grey;
+                    background-color: LightGrey;}
+
+    .nameStyle {font-weight: bold;
+                    font-family: Arial;
+                    text-align:center;}
+
+    </style>
+</head>
+<body>
+
+<form name='form' action="/registration" method="post">
+    <table align="center" width="500" class="formTable">
+        <tr>
+            <td colspan="2">
+                <h3 class="nameStyle">Регистрация</h3>
+            </td>
+        </tr>
+
+        <tr>
+            <td align="center">
+                <label class="nameStyle">Логин</label>
+            </td>
+            <td>
+                <input type="text" name="userName" class="boldSelect" pattern="[a-zA-Z0-9]+" minlength="4" maxlength="10">
+            </td>
+        </tr>
+
+        <tr>
+            <td align="center">
+                <label class="nameStyle">Пароль</label>
+            </td>
+            <td>
+                <input type="password" name="password" class="boldSelect" pattern="[a-zA-Z0-9]+" minlength="4" maxlength="10">
+            </td>
+        </tr>
+        <input  type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+        <tr>
+            <td colspan="2" height="5"></td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="submit" name="Registration" value="Регистрация" class="boldBtn">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" height="5"></td>
+        </tr>
+    </table>
+</form>
+
+<div style="color:red; text-align:center">{{error}}</div>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Курсы валют</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<table align="center" width="800">
+    <tr align="center" width="800">
+        <td>
+            <table width="800" class="formTableData">
+                <tr>
+                    <td class="menuElt"><a href="converter">Конвертер</a></td>
+                    <td class="menuElt"><a href="exchrates" >Курсы валют</a></td>
+                    <td class="menuElt"><a href="historyQuery">История</a></td>
+                    <form action="logout" method="post">
+                        <td class="menuElt"><input type="submit" value="Выйти" class="menuEltLogout"></td>
+                        <input  type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+                    </form>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td>
+            <h2 class="nameStyle">Конвертер</h2>
+        </td>
+    </tr>
+
+
+    <form name='form' method='post'>
+        <tr>
+            <td>
+                <table width="800" class="formTable">
+                    <tr>
+                        <td>
+                            <label class="nameStyle">Исходная валюта</label>
+                            <select name = "currFrom" class="boldSelect">
+                                <option value = {{FromCode}}>{{FromDescr}}</option>
+                                {{#currencyFrom}}
+                                    <option value = {{currencyCode}}>{{fullDescription}}</option>
+                                {{/currencyFrom}}
+                            </select>
+                        </td>
+                        <td>
+                            <label class="nameStyle">Целевая валюта</label>
+                            <select name = "currTo" class="boldSelect">
+                                <option value = {{ToCode}}>{{ToDescr}}</option>
+                                {{#currencyTo}}
+                                    <option value = {{currencyCode}}>{{fullDescription}}</option>
+                                {{/currencyTo}}
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><input name="valueFrom" type="text" value={{valueFrom}} class="boldInput" pattern="[0-9]+"></td>
+                        <td><input name="valueTo"  type="text" value={{retValue}} class="boldInput" readonly="true"></td>
+                    </tr>
+                    <input  type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+                    <tr>
+                        <td colspan="2" height="5"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" align="center">
+                            <input name="submit" type="submit" value="Конвертировать" class="boldBtn">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2" height="5"></td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </form>
+</table>
+</body>
+</html>

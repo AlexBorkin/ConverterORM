@@ -1,0 +1,49 @@
+<html>
+<head>
+    <title>Курсы валют</title>
+    <link rel="stylesheet" href="css/style.css"/>
+
+</head>
+<body>
+<table align="center" width="800">
+    <tr colspan="4" align="center">
+        <td>
+            <table width="800" class="formTableData">
+                <tr>
+                    <td class="menuElt"><a href="converter">Конвертер</a></td>
+                    <td class="menuElt"><a href="exchrates">Курсы валют</a></td>
+                    <td class="menuElt"><a href="historyQuery">История</a></td>
+                    <form action="logout" method="post">
+                       <input  type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+                        <td class="menuElt"><input type="submit" value="Выйти" class="menuEltLogout"></td>
+                    </form>
+                </tr>
+            </table>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="4" align="center"><h2 class="nameStyle">Курсы валют</h2></td>
+    </tr>
+
+    <tr colspan="4">
+        <table width="800" align="center" class="formTableData">
+            <tr>
+                <th class="thHeader">Дата</th>
+                <th class="thHeader">Код валюты</th>
+                <th class="thHeader">Описание валюты</th>
+                <th class="thHeader">Курс</th>
+            </tr>
+            {{#exchrate}}
+                <tr>
+                    <td class="tdRow">{{DateRate}}</td>
+                    <td class="tdRow">{{Currency.CurrencyCode}}</td>
+                    <td class="tdRow">{{Currency.Description}}</td>
+                    <td class="tdRow">{{CurrencyRate}}</td>
+                </tr>
+            {{/exchrate}}
+        </table>
+    </tr>
+</table>
+</body>
+</html>
