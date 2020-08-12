@@ -1,11 +1,16 @@
 package com.converter.currencyconverter.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
+@Data
+@AllArgsConstructor
 @Entity
 @Table(name = "role", uniqueConstraints = {@UniqueConstraint(columnNames = {"role_name"})})
 public class Role implements GrantedAuthority
@@ -26,36 +31,36 @@ public class Role implements GrantedAuthority
     public Role()
     {
     }
-
-    public Role(String roleName, String description) {
-        this.roleName = roleName;
-        this.description = description;
-    }
-
-    public Set<User> getUsers()
-    {
-        return users;
-    }
-
-    public void setUsers(Set<User> users) {
-        this.users = users;
-    }
-
-    public String getRoleName() {
-        return roleName;
-    }
-
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
+//
+//    public Role(String roleName, String description) {
+//        this.roleName = roleName;
+//        this.description = description;
+//    }
+//
+//    public Set<User> getUsers()
+//    {
+//        return users;
+//    }
+//
+//    public void setUsers(Set<User> users) {
+//        this.users = users;
+//    }
+//
+//    public String getRoleName() {
+//        return roleName;
+//    }
+//
+//    public void setRoleName(String roleName) {
+//        this.roleName = roleName;
+//    }
+//
+//    public String getDescription() {
+//        return description;
+//    }
+//
+//    public void setDescription(String description) {
+//        this.description = description;
+//    }
 
     @Override
     public String getAuthority()

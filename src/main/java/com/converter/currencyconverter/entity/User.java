@@ -1,14 +1,19 @@
 package com.converter.currencyconverter.entity;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.lang.annotation.Documented;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+@Data
+@AllArgsConstructor
 @Entity
 @Table(name ="user_table", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_name"})})
 public class User implements UserDetails
