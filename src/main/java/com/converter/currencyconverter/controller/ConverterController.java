@@ -2,6 +2,7 @@ package com.converter.currencyconverter.controller;
 
 import com.converter.currencyconverter.CurrencyconverterApplication;
 import com.converter.currencyconverter.entity.Currency;
+import com.converter.currencyconverter.entity.HistoryQuery;
 import com.converter.currencyconverter.service.CurrencyService;
 import com.converter.currencyconverter.service.ExchRateService;
 import com.converter.currencyconverter.service.HistoryQueryService;
@@ -12,6 +13,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,6 +43,12 @@ public class ConverterController
         this.historyQueryService = historyQueryService;
     }
 
+    @GetMapping("/docs")
+    public RedirectView getSwaggerDocs()
+    {
+       return new RedirectView("/swagger-ui.html");
+    }
+
     @GetMapping({"/", "/converter"})
     public String converter(Model model)
     {
@@ -47,11 +56,6 @@ public class ConverterController
         List<Currency> resultListTo = new ArrayList<Currency>();
 
         currencyListDB = currencyService.listCurrency();
-
-//        if (CurrencyconverterApplication.currencyListGlobal.isEmpty())
-//        {
-//            CurrencyconverterApplication.currencyListGlobal = currencyService.listCurrency();
-//        }
 
         Currency currencyDefFrom = currencyListDB.get(currencyRURPos);
         Currency currencyDefTo   = currencyListDB.get(currencyUSDPos);
@@ -104,7 +108,7 @@ public class ConverterController
         model.addAttribute("valueFrom",    valueFrom);
         model.addAttribute("retValue",     retVal);
 
-       // historyQueryService.saveRecord(currFrom, currTo, valueFrom.doubleValue(), retVal, new Date());
+        historyQueryService.save(new HistoryQuery(valueFrom.doubleValue(), retVal, new Date(), currDefFrom, currDefTo));
 
         return "converter";
     }

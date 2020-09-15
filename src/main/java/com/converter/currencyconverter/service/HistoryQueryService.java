@@ -13,5 +13,13 @@ public class HistoryQueryService
     @Autowired
     private HistoryQueryRepos historyQueryRepos;
 
-    //public List<HistoryQuery> getAll()
+    public List<HistoryQuery> getAll()
+    {
+        return historyQueryRepos.findAll();
+    }
+
+    public void save(HistoryQuery historyQuery)
+    {
+        historyQueryRepos.save(historyQuery);
+    }
 }

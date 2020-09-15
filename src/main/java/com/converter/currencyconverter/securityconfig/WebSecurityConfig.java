@@ -27,7 +27,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     protected void configure(HttpSecurity http) throws Exception
     {
         http.authorizeRequests().antMatchers( "/registration").permitAll();
-        // http.authorizeRequests().antMatchers("/**").hasRole("ADMIN");
+        http.authorizeRequests().antMatchers("/swagger-ui**").permitAll();
+        //http.authorizeRequests().antMatchers("/**").hasRole("ADMIN");
         http.authorizeRequests().anyRequest().authenticated();
         http.authorizeRequests().and().formLogin().loginPage("/login").permitAll();
         http.authorizeRequests().and().logout().permitAll();

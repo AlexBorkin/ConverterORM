@@ -12,8 +12,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
-@AllArgsConstructor
+//@Data
+//@AllArgsConstructor
 @Entity
 @Table(name ="user_table", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_name"})})
 public class User implements UserDetails

@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-@Data
-@AllArgsConstructor
+//@Data
+//@AllArgsConstructor
 @Entity
 @Table(name = "currency", uniqueConstraints = {@UniqueConstraint(columnNames = {"currency_code"})})
 public class Currency implements Serializable
@@ -52,6 +52,8 @@ public class Currency implements Serializable
     {
     }
 
+
+
     public Long getId() {
         return id;
     }
@@ -70,43 +72,43 @@ public class Currency implements Serializable
        this.exchRateList.add(exchRate);
     }
 
-//    public String getCurrencyCode() {
-//        return currencyCode;
-//    }
-//
-//    public void setCurrencyCode(String currencyCode) {
-//        this.currencyCode = currencyCode;
-//    }
-//
-//    public String getDescription() {
-//        return description;
-//    }
-//
-//    public void setDescription(String description) {
-//        this.description = description;
-//    }
-//
+    public String getCurrencyCode() {
+        return currencyCode;
+    }
+
+    public void setCurrencyCode(String currencyCode) {
+        this.currencyCode = currencyCode;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getFullDescription() {
         return "(" + this.currencyCode + ") " + this.description;//fullDescription;
     }
-//
-////    public void setFullDescription(String fullDescription) {
-////        this.fullDescription = fullDescription;
-////    }
-//
-//    public int getNominal() {
-//        return nominal;
-//    }
-//
-//    public void setNominal(int nominal) {
-//        this.nominal = nominal;
-//    }
-//
-//    public String getNumCode() {
-//        return numCode;
-//    }
-//
-//    public void setNumCode(String numCode) {
-//        this.numCode = numCode;
-//    }
+
+    public void setFullDescription(String fullDescription) {
+        this.fullDescription = fullDescription;
+    }
+
+    public int getNominal() {
+        return nominal;
+    }
+
+    public void setNominal(int nominal) {
+        this.nominal = nominal;
+    }
+
+    public String getNumCode() {
+        return numCode;
+    }
+
+    public void setNumCode(String numCode) {
+        this.numCode = numCode;
+    }
 }
