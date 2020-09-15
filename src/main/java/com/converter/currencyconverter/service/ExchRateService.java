@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @Service
 public class ExchRateService
@@ -31,6 +32,11 @@ public class ExchRateService
         ExchRate exchRate = new ExchRate(curDate, value, charCode, code);
 
         exchRateRepos.save(exchRate);
+    }
+
+    public List<ExchRate> findAll()
+    {
+        return exchRateRepos.findAll();
     }
 
     public Double calcValue(String currFrom, String currTo, Integer value)

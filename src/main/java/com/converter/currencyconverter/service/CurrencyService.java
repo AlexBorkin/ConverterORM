@@ -56,6 +56,7 @@ public class CurrencyService
 
                 try
                 {
+
                     exchRate = new ExchRate(curAttr.getCurDate(),
                                             curAttr.getValue(),
                                             curAttr.getName(),

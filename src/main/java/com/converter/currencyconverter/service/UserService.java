@@ -50,6 +50,8 @@ public class UserService implements UserDetailsService
             roleRepos.save(role);
         }
 
+        //Role role = new Role("USER", "USER");
+
         User user = new User(userName, passwordEncoder.encode(password), true);
 
         user.addNewUser(role);

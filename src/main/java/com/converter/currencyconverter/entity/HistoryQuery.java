@@ -38,36 +38,36 @@ public class HistoryQuery
     {
     }
 
-//    public HistoryQuery(Double convertVal, Double resultVal, Date dateConvert, Currency currencyFrom, Currency currencyTo)
-//    {
-//        this.convertVal = convertVal;
-//        this.resultVal = resultVal;
-//        this.dateConvert = dateConvert;
-//        this.currencyFrom = currencyFrom;
-//        this.currencyTo = currencyTo;
-//    }
-//
-//    public Double getConvertVal() {
-//        return convertVal;
-//    }
-//
-//    public void setConvertVal(Double convertVal) {
-//        this.convertVal = convertVal;
-//    }
-//
-//    public Double getResultVal() {
-//        return resultVal;
-//    }
-//
-//    public void setResultVal(Double resultVal) {
-//        this.resultVal = resultVal;
-//    }
-//
-//    public Date getDateConvert() {
-//        return dateConvert;
-//    }
-//
-//    public void setDateConvert(Date dateConvert) {
-//        this.dateConvert = dateConvert;
-//    }
+    public HistoryQuery(Double convertVal, Double resultVal, Date dateConvert, Currency currencyFrom, Currency currencyTo)
+    {
+        this.convertVal = convertVal;
+        this.resultVal = resultVal;
+        this.dateConvert = dateConvert;
+        this.currencyFrom = currencyFrom;
+        this.currencyTo = currencyTo;
+    }
+
+    public Double getConvertVal() {
+        return convertVal;
+    }
+
+    public void setConvertVal(Double convertVal) {
+        this.convertVal = convertVal;
+    }
+
+    public Double getResultVal() {
+        return resultVal;
+    }
+
+    public void setResultVal(Double resultVal) {
+        this.resultVal = resultVal;
+    }
+
+    public Date getDateConvert() {
+        return dateConvert;
+    }
+
+    public void setDateConvert(Date dateConvert) {
+        this.dateConvert = dateConvert;
+    }
 }
