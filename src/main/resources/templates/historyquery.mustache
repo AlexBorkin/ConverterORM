@@ -88,6 +88,7 @@
                     <th class="thHeader">Целевая валюта</th>
                     <th class="thHeader">Исходная сумма</th>
                     <th class="thHeader">Полученная сумма</th>
+                    <th class="thHeader">Пользователь</th>
                     <th class="thHeader">Дата</th>
                 </tr>
                 {{#history}}
@@ -96,6 +97,7 @@
                         <td class="tdRow">{{currencyTo.fullDescription}}</td>
                         <td class="tdRow">{{convertVal}}</td>
                         <td class="tdRow">{{resultVal}}</td>
+                        <td class="tdRow">{{getAuthorName}}</td>
                         <td class="tdRow">{{dateConvert}}</td>
                     </tr>
                 {{/history}}

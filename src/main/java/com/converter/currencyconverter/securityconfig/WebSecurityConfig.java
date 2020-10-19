@@ -32,6 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
         http.authorizeRequests().anyRequest().authenticated();
         http.authorizeRequests().and().formLogin().loginPage("/login").permitAll();
         http.authorizeRequests().and().logout().permitAll();
+
     }
 
     @Autowired
@@ -39,4 +40,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter
     {
         auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
     }
+
 }

@@ -3,16 +3,19 @@ package com.converter.currencyconverter.controller;
 import com.converter.currencyconverter.CurrencyconverterApplication;
 import com.converter.currencyconverter.entity.Currency;
 import com.converter.currencyconverter.entity.HistoryQuery;
+import com.converter.currencyconverter.entity.User;
 import com.converter.currencyconverter.service.CurrencyService;
 import com.converter.currencyconverter.service.ExchRateService;
 import com.converter.currencyconverter.service.HistoryQueryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -78,7 +81,11 @@ public class ConverterController
 
     @PostMapping({"/","/converter"})
     @Transactional
-    public String calculate(String currFrom, String currTo, Integer valueFrom, Model model)
+    public String calculate(@AuthenticationPrincipal User user,
+                            @RequestParam String currFrom,
+                            @RequestParam String currTo,
+                            @RequestParam Integer valueFrom,
+                            Model model)
     {
         List<Currency> retsultListFrom = new ArrayList<Currency>();
         List<Currency> retsultListTo   = new ArrayList<Currency>();
@@ -108,7 +115,16 @@ public class ConverterController
         model.addAttribute("valueFrom",    valueFrom);
         model.addAttribute("retValue",     retVal);
 
-        historyQueryService.save(new HistoryQuery(valueFrom.doubleValue(), retVal, new Date(), currDefFrom, currDefTo));
+       // HistoryQuery historyQuery = new HistoryQuery()
+
+       // historyQueryService.save(new HistoryQuery(valueFrom.doubleValue(), retVal, new Date(), currDefFrom, currDefTo, user));
+
+        historyQueryService.save(new HistoryQuery(valueFrom.doubleValue(),
+                retVal,
+                new Date(),
+                currDefFrom,
+                currDefTo,
+                user));
 
         return "converter";
     }

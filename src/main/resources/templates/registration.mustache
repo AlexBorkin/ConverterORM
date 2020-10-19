@@ -43,7 +43,7 @@
         </tr>
 
         <tr>
-            <td align="center">
+            <td align="left">
                 <label class="nameStyle">Логин</label>
             </td>
             <td>
@@ -52,13 +52,19 @@
         </tr>
 
         <tr>
-            <td align="center">
+            <td align="left">
                 <label class="nameStyle">Пароль</label>
             </td>
             <td>
                 <input type="password" name="password" class="boldSelect" pattern="[a-zA-Z0-9]+" minlength="4" maxlength="10">
             </td>
         </tr>
+
+        <tr>
+            <td align="left"><label  class="nameStyle">Email</label></td>
+            <td><input type="email" name="email" class="boldSelect"></td>
+        </tr>
+
         <input  type="hidden" name="_csrf" value="{{_csrf.token}}"/>
         <tr>
             <td colspan="2" height="5"></td>

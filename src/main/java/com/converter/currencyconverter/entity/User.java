@@ -6,6 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Pattern;
 import java.lang.annotation.Documented;
 import java.util.Collection;
 import java.util.Collections;
@@ -27,6 +28,10 @@ public class User implements UserDetails
     private String userName;
     private String password;
     private Boolean active;
+    @Pattern(message = "Wrong format for email", regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" +
+            "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
+    @Column(unique = true)
+    private String email;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name="user_role_ref", joinColumns = @JoinColumn(name = "role_id"), inverseJoinColumns = @JoinColumn(name="user_id"))
@@ -43,31 +48,36 @@ public class User implements UserDetails
         this.active = active;
     }
 
+    public User(String userName, String password, String email, Boolean active)
+    {
+        this.userName = userName;
+        this.password = password;
+        this.active = active;
+        this.email = email;
+    }
+
     public void addNewUser(Role role)
     {
-        //role.setUsers(Collections.singleton(this));
-
         Set<Role> roles = Collections.singleton(role);
 
         this.setRoles(roles);
-
     }
 
-    public String getUserName() {
-        return userName;
-    }
+//    public String getUserName() {
+//        return userName;
+//    }
 
     public void setUserName(String userName) {
         this.userName = userName;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
+//    public void setPassword(String password) {
+//        this.password = password;
+//    }
+//
+//    public Boolean getActive() {
+//        return active;
+//    }
 
     public void setActive(Boolean active) {
         this.active = active;

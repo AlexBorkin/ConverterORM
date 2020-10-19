@@ -22,7 +22,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/registration")
-    public String addNewUser(String userName, String password, Model model)
+    public String addNewUser(String userName, String password, String email, Model model)
     {
         String retValueEndPoint = "main";
         User   userExist = null;
@@ -40,7 +40,7 @@ public class RegistrationController {
             {
                 try
                 {
-                    userService.addNewUser(userName, password);
+                    userService.addNewUser(userName, password, email);
                     retValueEndPoint = "redirect:/login";
                 }
                 catch (Exception exceptionMessage)

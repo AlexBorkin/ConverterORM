@@ -2,8 +2,10 @@ package com.converter.currencyconverter.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -20,7 +22,8 @@ public class HistoryQuery
 
     private Double convertVal;
     private Double resultVal;
-    private Date dateConvert;
+    @Temporal(value = TemporalType.DATE)
+    public Date dateConvert;
 
     @ManyToOne(targetEntity = User.class)
     @JoinColumn(name = "author_id", referencedColumnName = "id", foreignKey = @ForeignKey(name = "FK_User_Id"))
@@ -38,36 +41,41 @@ public class HistoryQuery
     {
     }
 
-    public HistoryQuery(Double convertVal, Double resultVal, Date dateConvert, Currency currencyFrom, Currency currencyTo)
+    public String getAuthorName()
+    {
+        return author != null ? author.getUsername() : "<empty>";
+    }
+
+
+
+    public HistoryQuery(Double convertVal,
+                        Double resultVal,
+                        Date dateConvert,
+                        Currency currencyFrom,
+                        Currency currencyTo,
+                        User user)
     {
         this.convertVal = convertVal;
         this.resultVal = resultVal;
         this.dateConvert = dateConvert;
         this.currencyFrom = currencyFrom;
         this.currencyTo = currencyTo;
+        this.author = user;
     }
-
-    public Double getConvertVal() {
-        return convertVal;
-    }
-
-    public void setConvertVal(Double convertVal) {
-        this.convertVal = convertVal;
-    }
-
-    public Double getResultVal() {
-        return resultVal;
-    }
-
-    public void setResultVal(Double resultVal) {
-        this.resultVal = resultVal;
-    }
-
-    public Date getDateConvert() {
-        return dateConvert;
-    }
-
-    public void setDateConvert(Date dateConvert) {
-        this.dateConvert = dateConvert;
-    }
+//
+//
+//    public HistoryQuery(double doubleValue,
+//                        Double retVal,
+//                        Date date,
+//                        Currency currDefFrom,
+//                        Currency currDefTo,
+//                        User user)
+//    {
+//        this.convertVal = convertVal;
+//        this.resultVal = resultVal;
+//        this.dateConvert = dateConvert;
+//        this.currencyFrom = currencyFrom;
+//        this.currencyTo = currencyTo;
+//        this.author = user;
+//    }
 }

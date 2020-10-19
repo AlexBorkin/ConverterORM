@@ -59,6 +59,23 @@ public class UserService implements UserDetailsService
         userRepos.save(user);
     }
 
+    public void addNewUser(String userName, String password, String email)
+    {
+        Role role = roleRepos.findByRoleName(userRoleDefault);
+
+        if (role == null)
+        {
+            role = new Role(userRoleDefault, userRoleDefault);
+            roleRepos.save(role);
+        }
+
+        User user = new User(userName, passwordEncoder.encode(password), email, true);
+
+        user.addNewUser(role);
+
+        userRepos.save(user);
+    }
+
     public User findUserByUserName(String userName)
     {
         User user = new User();

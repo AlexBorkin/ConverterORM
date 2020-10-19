@@ -10,7 +10,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +29,14 @@ public class HistoryController
     private Integer currencyUSDPos;
 
     List<Currency> currencyListDB;
+
+    public static final Currency currencyAllElt = new Currency();
+
+    static
+    {
+        currencyAllElt.setCurrencyCode("");
+        currencyAllElt.setFullDescription("Все");
+    }
 
     @Autowired
     private CurrencyService currencyService;
@@ -47,20 +57,56 @@ public class HistoryController
         model.addAttribute("ToCode", currencyListDB.get(currencyUSDPos).getCurrencyCode());
         model.addAttribute("ToDescr", currencyListDB.get(currencyUSDPos).getFullDescription());
 
-        List<Currency> currencyFrom = currencyListDB.stream()
+        List<Currency> currencyFromList = currencyListDB.stream()
                                         .filter(currency -> !currency.getCurrencyCode().equals(currencyListDB.get(currencyRURPos)))
                                         .collect(Collectors.toList());
 
-        List<Currency> currencyTo = currencyListDB.stream()
+        List<Currency> currencyToList = currencyListDB.stream()
                                         .filter(currency -> !currency.getCurrencyCode().equals(currencyListDB.get(currencyUSDPos)))
                                         .collect(Collectors.toList());
 
-        model.addAttribute("currencyFrom", currencyFrom);
-        model.addAttribute("currencyTo", currencyTo);
+        model.addAttribute("currencyFrom", currencyFromList);
+        model.addAttribute("currencyTo", currencyToList);
 
         model.addAttribute("convertDate", new SimpleDateFormat("yyyy-MM-dd").format(new Date()));
 
         model.addAttribute("history", historyQueryList);
+
+        return "historyquery";
+    }
+
+    @PostMapping("/historyQuery")
+    public String applyFilters(String currencyCodeFrom, String currencyCodeTo, String convertDate, Model model) throws ParseException
+    {
+        List<HistoryQuery> historyQueryList = historyQueryService.findByFilters(currencyCodeFrom,
+                currencyCodeTo,
+                new SimpleDateFormat("yyyy-MM-dd").parse(convertDate));
+
+        currencyListDB = currencyService.listCurrency();
+
+        model.addAttribute("FromCode", currencyListDB.get(currencyRURPos).getCurrencyCode());
+        model.addAttribute("FromDescr", currencyListDB.get(currencyRURPos).getFullDescription());
+
+        model.addAttribute("ToCode", currencyListDB.get(currencyUSDPos).getCurrencyCode());
+        model.addAttribute("ToDescr", currencyListDB.get(currencyUSDPos).getFullDescription());
+
+        List<Currency> currencyFromList = currencyListDB.stream()
+                .filter(currency -> !currency.getCurrencyCode().equals(currencyListDB.get(currencyRURPos)))
+                .collect(Collectors.toList());
+
+        List<Currency> currencyToList = currencyListDB.stream()
+                .filter(currency -> !currency.getCurrencyCode().equals(currencyListDB.get(currencyUSDPos)))
+                .collect(Collectors.toList());
+
+        model.addAttribute("currencyFrom", currencyFromList);
+        model.addAttribute("currencyTo", currencyToList);
+
+        //model.addAttribute("convertDate", new SimpleDateFormat("yyyy-MM-dd").format(convertDate));
+
+        model.addAttribute("convertDate", convertDate);
+
+        model.addAttribute("history", historyQueryList);
+
 
         return "historyquery";
     }
